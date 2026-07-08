@@ -1,0 +1,72 @@
+/* Mobile Controls - Reusing Desktop Components */
+
+.controlsWrapper {
+    display: none;
+    z-index: 200;
+}
+
+.menuContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.menuButton {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+    outline: none;
+}
+
+.menuButton:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.menuButton:active {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 180;
+}
+
+.dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    z-index: 190;
+    padding: 12px;
+}
+
+[data-theme="dark"] .dropdown {
+    background: #1e1e1e;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.controlsInMenu {
+    display: flex;
+    gap: 8px;
+    flex-direction: row;
+}
+
+/* Show on mobile */
+@media (max-width: 768px) {
+    .controlsWrapper {
+        display: flex;
+    }
+}

@@ -1,0 +1,400 @@
+/* aboutModal.module.css — Figma exact spec */
+
+/* ── Backdrop ── */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.15);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    z-index: 60;
+}
+
+/* ── Centering wrapper ── */
+.modalContainer {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 61;
+    pointer-events: none;
+    padding: 65px 24px;
+}
+
+.modalWrapper {
+    pointer-events: auto;
+    filter:
+        drop-shadow(0 2px 4px rgba(0, 0, 0, 0.06))
+        drop-shadow(0 12px 32px rgba(0, 0, 0, 0.14))
+        drop-shadow(0 40px 80px rgba(0, 0, 0, 0.18));
+    width: 1099px;
+    max-width: calc(100vw - 48px);
+}
+
+/* ── Outer window shell ── */
+.modal {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    overflow: hidden;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+/* ════════════════════════════════════════
+   TITLE BAR — macOS window chrome
+════════════════════════════════════════ */
+.titleBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 44px;
+    padding: 0 16px;
+    background: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    flex-shrink: 0;
+    position: relative;
+    border-radius: 15.32px 15.32px 0 0;
+    box-sizing: border-box;
+}
+
+.trafficLights {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 1;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: none;
+    box-sizing: border-box;
+}
+
+.dot svg {
+    width: 8px;
+    height: 8px;
+    opacity: 0;
+    transition: opacity 0.15s;
+}
+
+.modalWrapper:hover .dot svg {
+    opacity: 0.7;
+}
+
+/* Centred window title */
+.titleBarLabel {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(20, 35, 51, 0.5);
+    letter-spacing: 0;
+    pointer-events: none;
+}
+
+.titleBarSpacer {
+    width: 52px;
+}
+
+/* ════════════════════════════════════════
+   BODY — main container
+════════════════════════════════════════ */
+.body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 48px;
+    gap: 10px;
+    background: #f6f6f6;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* Inner container */
+.contentWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+    max-width: 739px;
+    box-sizing: border-box;
+}
+
+/* Mask group — white container */
+.maskGroup {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    padding: 12px;
+    gap: 12px;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+/* ────────────────────────────────────────
+   LEFT PANEL — gradient card
+────────────────────────────────────────── */
+.leftPanel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 32px;
+    flex: 1;
+    min-height: 420px;
+    background: url(/about-gradient.jpg);
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    flex-shrink: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.gradientBg {
+    display: none;
+}
+
+/* Figma: gradient overlay */
+.leftOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.15) 0%,
+        rgba(0, 0, 0, 0.0) 35%,
+        rgba(0, 0, 0, 0.35) 100%
+    );
+    pointer-events: none;
+}
+
+/* ── "About" label ── */
+.aboutLabel {
+    position: relative;
+    z-index: 2;
+    font-size: 24px;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 22px;
+    letter-spacing: 0;
+    margin: 0;
+}
+
+/* ── Teaser block ── */
+.teaserBlock {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    gap: 8px;
+    width: 100%;
+}
+
+/* ── "What if..." eyebrow ── */
+.teaserEyebrow {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.80);
+    line-height: 32px;
+    letter-spacing: 0;
+    margin: 0;
+}
+
+/* ── Title heading ── */
+.teaserTitle {
+    font-size: 24px;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 32px;
+    letter-spacing: 0;
+    margin: 0;
+}
+
+/* ────────────────────────────────────────
+   RIGHT PANEL — bio content
+────────────────────────────────────────── */
+.rightPanel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 36px 36px;
+    gap: 8px;
+    flex: 1;
+    background: transparent;
+}
+
+/* ── "Swosti" name + verified ── */
+.nameRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    gap: 4px;
+    margin-bottom: 0;
+}
+
+.name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #142333;
+    line-height: 22px;
+    letter-spacing: 0;
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.verifiedBadge {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+/* ── Bio container ── */
+.bioContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    gap: 16px;
+    width: 100%;
+}
+
+/* ── Bio paragraphs ── */
+.bioParagraph {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 22px;
+    color: #142333;
+    margin: 0;
+    letter-spacing: 0;
+    width: 100%;
+}
+
+/* ── CTA ── */
+.cta {
+    font-size: 15px;
+    font-weight: 600;
+    color: #788A62;
+    line-height: 22px;
+    margin: 0;
+    letter-spacing: 0;
+}
+
+/* ════════════════════════════════════════
+   MOBILE — stacked layout
+════════════════════════════════════════ */
+@media (max-width: 768px) {
+    .modalContainer {
+        padding: 16px;
+        align-items: center;
+    }
+
+    .modalWrapper {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .modal {
+        max-height: 85vh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+    
+    .body {
+        padding: 16px;
+        overflow-y: auto;
+        flex: 1;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .contentWrapper {
+        max-width: 100%;
+    }
+
+    .maskGroup {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .leftPanel {
+        width: 100%;
+        min-height: 260px;
+        flex-shrink: unset;
+        box-sizing: border-box;
+    }
+
+    .rightPanel {
+        width: 100%;
+        padding: 24px 20px;
+        box-sizing: border-box;
+    }
+
+    .teaserBlock {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+/* ── Dark mode overrides ── */
+:global([data-theme="dark"]) .modal {
+    background: #1e1e1e;
+}
+
+:global([data-theme="dark"]) .titleBar {
+    background: #252525;
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+:global([data-theme="dark"]) .titleBarLabel {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+:global([data-theme="dark"]) .body {
+    background: #1a1a1a;
+}
+
+:global([data-theme="dark"]) .maskGroup {
+    background: #1e1e1e;
+}
+
+:global([data-theme="dark"]) .rightPanel {
+    background: transparent;
+}
+
+:global([data-theme="dark"]) .name {
+    color: #f0f0f0;
+}
+
+:global([data-theme="dark"]) .bioParagraph {
+    color: rgba(240, 240, 240, 0.72);
+}
+
+:global([data-theme="dark"]) .cta {
+    color: #8db868;
+}

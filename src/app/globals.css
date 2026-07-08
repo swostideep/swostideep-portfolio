@@ -1,0 +1,257 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ════════════════════════════════════════
+   WELCOME OVERLAY BLUR
+   filter: blur() applied directly to page content is bulletproof —
+   no compositing-layer issues like backdrop-filter has.
+   The overlay sits outside #page-content so it stays sharp.
+════════════════════════════════════════ */
+#page-content {
+  transition: filter 0.4s ease;
+}
+#page-content.welcome-blurred {
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+:root {
+  /* Global Foreground */
+  --text-primary: #111827;
+  --text-primary-rgb: 17, 24, 39;
+  --text-secondary: rgba(0, 0, 0, 0.78);
+
+  /* Global Backgrounds */
+  --bg-primary: #e5e5e5;
+  --bg-secondary: #f5f5f5;
+  --bg-card: #ffffff;
+
+  /* Translucency & Glassmorphism */
+  --bg-glass: rgba(255, 255, 255, 0.55);
+  --bg-blur: rgba(255, 255, 255, 0.4);
+  
+  /* Sidebar (Highly transparent so the blur works) */
+  --glass-sidebar: rgba(255, 255, 255, 0.15) !important; 
+
+  /* Borders */
+  --border-subtle: rgba(0, 0, 0, 0.15);
+  --border-strong: rgba(0, 0, 0, 0.22);
+
+  /* Spacing Grid (16px base) */
+  --space-unit: 16px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 80px;
+
+  /* Layout */
+  --sidebar-width: 256px;
+  --card-window-width: 31.625rem;
+  --card-window-height: 29.375rem;
+
+  /* LIGHT MODE: Nav Boxes (Forces them to match the bright center toggle) */
+  --control-btn-bg: rgba(255, 255, 255, 0.7) !important;
+  --control-btn-border: rgba(255, 255, 255, 0.9) !important;
+  --control-btn-icon: #111827 !important;
+  
+  /* LIGHT MODE: Brightness Slider  white pill, darker fill for differentiation */
+  --slider-track: rgba(255, 255, 255, 0.95) !important;
+  --slider-fill-color: rgba(0, 0, 0, 0.09) !important;
+  --slider-tick: rgba(0, 0, 0, 0.14) !important;
+}
+
+
+
+[data-theme="dark"] {
+  /* Global Foreground */
+  --text-primary: #ffffff;
+  --text-primary-rgb: 255, 255, 255;
+  --text-secondary: rgba(255, 255, 255, 0.85);
+
+  /* Global Backgrounds */
+  --bg-primary: #000000;
+  --bg-secondary: rgba(30, 30, 30, 0.75);
+  --bg-card: rgba(28, 28, 30, 0.85);
+
+  /* Translucency & Glassmorphism */
+  --bg-glass: rgba(28, 28, 30, 0.45);
+  --bg-blur: rgba(25, 25, 28, 0.55);
+  --glass-sidebar: rgba(0, 0, 0, 0.55);
+
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, 0.18);
+  --border-strong: rgba(255, 255, 255, 0.25);
+
+  /* Buttons */
+  --btn-bg: rgba(255, 255, 255, 0.12);
+  --btn-bg-hover: rgba(255, 255, 255, 0.22);
+  --btn-text: var(--text-primary);
+  /* Top Right Control Buttons - Dark Mode */
+  --control-btn-bg: rgba(0, 0, 0, 0.4) !important;
+  --control-btn-border: rgba(255, 255, 255, 0.1) !important;
+  --control-btn-icon: #f3f4f6 !important;
+  --control-btn-hover: rgba(0, 0, 0, 0.5) !important;
+
+  /* Slider Track & Fill - Dark Mode */
+  --slider-track: rgba(255, 255, 255, 0.12) !important;
+  --slider-fill-color: rgba(255, 255, 255, 0.85) !important;
+  --slider-tick: rgba(255, 255, 255, 0.25) !important;
+
+  /* Accents */
+  --accent-color: #409cff;
+}
+
+body {
+  color: var(--text-primary);
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--bg-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Fix Dark Mode Code Text Readability */
+[data-theme='dark'] pre, 
+[data-theme='dark'] code {
+  color: #e2e8f0 !important;
+}
+[data-theme='dark'] .keyword { color: #c678dd !important; }
+[data-theme='dark'] .string { color: #98c379 !important; }
+[data-theme='dark'] .function { color: #61afef !important; }
+[data-theme='dark'] .comment { color: #5c6370 !important; }
+
+/* Posts Window & Feed Responsiveness */
+.posts-window-wrapper {
+  width: 82vw;
+  max-width: 1200px;
+  height: 88vh;
+}
+
+.posts-feed-root {
+  padding: 5vh 0 0 12%;
+  width: 100%;
+  height: 100%;
+}
+
+.posts-inner-container {
+  width: 100%;
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateX(-70px);
+}
+
+/* Expanded Post Overlay Classes */
+.posts-expanded-backdrop {
+  position: absolute;
+  top: -5vh;
+  left: -12%;
+  width: 113.7vw;
+  height: 100vh;
+  background: rgba(240, 240, 240, 0.95);
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+.posts-expanded-wrapper {
+  position: absolute;
+  top: -5vh;
+  left: -12%;
+  width: 82vw;
+  height: 100vh;
+  z-index: 101;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  padding-top: 10vh;
+  padding-bottom: 150px;
+  pointer-events: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.posts-expanded-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.posts-expanded-card {
+  background: #FBFBFB;
+  width: 95%;
+  max-width: 850px;
+  height: auto;
+  padding: 40px;
+  pointer-events: auto;
+  box-shadow: 0 24px 48px rgba(0,0,0,0.1);
+  transform: translate(50px, 0);
+  margin-bottom: 40px;
+  box-sizing: border-box;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .desktop-controls {
+    display: none !important;
+  }
+
+  /* Show mobile blocker */
+  .mobile-blocker {
+    display: flex !important;
+  }
+
+  /* Posts overrides for mobile */
+  .posts-window-wrapper {
+    width: 95vw !important;
+    height: 90vh !important;
+    max-width: none !important;
+  }
+
+  .posts-feed-root {
+    padding: 0 !important;
+  }
+
+  .posts-inner-container {
+    transform: none !important;
+    padding: 16px 0 !important;
+  }
+
+  /* Expanded Overlay overrides for mobile */
+  .posts-expanded-backdrop {
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .posts-expanded-wrapper {
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    padding-top: 24px !important;
+    padding-bottom: 100px !important;
+  }
+
+  .posts-expanded-card {
+    padding: 20px !important;
+    transform: none !important;
+    width: 92% !important;
+  }
+}
+
+/* Hide mobile only on desktop */
+@media (min-width: 769px) {
+  .mobile-nav-only {
+    display: none !important;
+  }
+
+  .mobile-controls-only {
+    display: none !important;
+  }
+}

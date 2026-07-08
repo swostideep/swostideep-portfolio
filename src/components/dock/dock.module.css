@@ -1,0 +1,115 @@
+/* Dock.module.css */
+
+.dockWrapper {
+    position: absolute;
+    /* Clear the home indicator / browser bottom bar via the safe-area inset.
+       Falls back to a flat 24px on devices without a defined inset. */
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    left: 50%;
+    transform: translateX(-50%);
+    /* Keeps the dock perfectly centered */
+    z-index: 50;
+    /* Ensures it sits above blur layers */
+    width: fit-content;
+    /* Never wider than the viewport — was clipping first/last icons on
+       small phones where 6 icons × 48px + gaps overflowed by ~20px. */
+    max-width: calc(100vw - 16px);
+}
+
+.dock {
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+.dock {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    /* Anchors icons to the bottom so they grow upwards */
+    gap: 14px;
+    /* Symmetric vertical padding so the bar feels balanced top/bottom.
+       Height grows accordingly: 48px icon + 14px × 2 = 76px. */
+    padding: 14px 18px;
+    height: 76px;
+}
+
+/* Tighten the dock on narrow viewports so all 6 icons fit without clipping. */
+@media (max-width: 420px) {
+    .dock {
+        gap: 9px;
+        /* Symmetric padding: 42px icon + 12px × 2 = 66px tall. */
+        padding: 12px;
+        height: 66px;
+    }
+}
+
+.dockBgFill {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.28);
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
+    backdrop-filter: blur(28px) saturate(160%);
+    z-index: -1;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-subtle);
+}
+
+[data-theme="dark"] .dockBgFill {
+    background: var(--bg-glass);
+}
+
+.iconButton {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transform-origin: bottom;
+    /* Crucial for growing upwards */
+}
+
+/* Override the inline 48px size with !important on narrow phones so all 6
+   icons fit. JS sets inline width/height; this scales them down in CSS. */
+@media (max-width: 420px) {
+    .iconButton {
+        width: 42px !important;
+        height: 42px !important;
+    }
+}
+
+.activeDot {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(20, 35, 51, 0.6);
+}
+
+.dockTooltip {
+    position: absolute;
+    bottom: calc(100% + 14px);
+    left: 50%;
+    translate: -50% 0;
+    background: var(--bg-card);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    color: var(--text-primary);
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 100px;
+    white-space: nowrap;
+    pointer-events: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    z-index: 100;
+}
+
+/* Desktop and mobile share the exact same beautiful glassmorphic dock style */
