@@ -49,7 +49,7 @@ export default function DockIcon({ slug, name, isActive, mouseX, onSelect }: Doc
         >
             <div style={{
                 width: "100%", height: "100%", borderRadius: 12,
-                background: "rgba(20, 20, 25, 0.85)", color: "#ff8c82",
+                background: "rgba(20, 20, 25, 0.85)", color: "#ffffff",
                 display: "flex", alignItems: "center", justifyContent: "center",
                 fontSize: "18px", fontWeight: "bold", fontFamily: "monospace",
                 boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
