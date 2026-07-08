@@ -12,9 +12,11 @@ type DesktopSidebarProps = {
     activePage?: string;
     onCollapseProject?: () => void;
     onShowPosts?: () => void;
+    onShowIdeas?: () => void;
+    onShowTimeline?: () => void;
 };
 
-const mainNavigationItems = ["Work", "About", "Post", "Resume"];
+const mainNavigationItems = ["Work", "About", "Timeline", "Ideas", "Certificates", "Resume"];
 const socialItems = ["LinkedIn", "Instagram", "Contact", "Feedback"];
 
 const getNavigationProps = (section: string) => {
@@ -24,8 +26,10 @@ const getNavigationProps = (section: string) => {
         case "Instagram": return { href: "https://www.instagram.com/swosti_2001/", target: "_blank" };
         case "Contact": return { href: "tel:7978659329", target: "_self" };
         case "Work": return { href: "/", target: "_self" };
-        case "Post": return { href: "#", target: "_self" };
-        case "Resume": return { href: "https://drive.google.com/file/d/1Rajt_0Jg-7ywpB0bX3N1JPgLXnW3uPiF/view?usp=sharing", target: "_blank" };
+        case "Timeline": return { href: "#", target: "_self" };
+        case "Ideas": return { href: "#", target: "_self" };
+        case "Certificates": return { href: "#", target: "_self" };
+        case "Resume": return { href: "https://drive.google.com/file/d/1-3hVwC3ftoJ5wIFMDtVSnAeZm1INa-SA/view?usp=sharing", target: "_blank" };
         case "Feedback": return { href: "#", target: "_self" };
         default: return { href: "#", target: "_self" };
     }
@@ -37,7 +41,9 @@ const DesktopSidebar: React.FC<DesktopSidebarProps> = ({
     isProjectExpanded,
     activePage = "Work",
     onCollapseProject,
-    onShowPosts
+    onShowPosts,
+    onShowIdeas,
+    onShowTimeline
 }) => {
     const nameRef = useRef<HTMLAnchorElement>(null);
     const { openModal: openAboutModal } = useAboutModal();
@@ -61,10 +67,10 @@ const DesktopSidebar: React.FC<DesktopSidebarProps> = ({
                             Swosti
                         </Link>
                         <p className={classes.bio}>
-                            Product designer crafting thoughtful, user-centric interfaces.
+                            Software developer who turns &quot;that&apos;s impossible&quot; into a pull request.
                         </p>
                         <p className={classes.bioSecondary}>
-                            Informed by cognitive science. Built for production.
+                            Strong in logical thinking and shipping fast without breaking things.
                         </p>
                     </div>
 
@@ -78,11 +84,15 @@ const DesktopSidebar: React.FC<DesktopSidebarProps> = ({
                                 onClick={
                                     section === "About"
                                         ? openAboutModal
-                                        : section === "Post"
+                                        : section === "Certificates"
                                             ? onShowPosts
-                                            : section === "Work" && onCollapseProject
-                                                ? onCollapseProject
-                                                : undefined
+                                            : section === "Ideas"
+                                                ? onShowIdeas
+                                                : section === "Timeline"
+                                                    ? onShowTimeline
+                                                    : section === "Work" && onCollapseProject
+                                                        ? onCollapseProject
+                                                        : undefined
                                 }
                             />
                         ))}

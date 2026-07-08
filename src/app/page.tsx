@@ -8,6 +8,8 @@ import DesktopSidebar from "@/components/desktopSidebar/desktopSidebar";
 import CardStackContainer from "@/components/homePage/cardStackContainer/cardStackContainer";
 import ExpandedProject from "@/components/homePage/expandedProject/ExpandedProject";
 import PostsFeed from "@/components/posts/PostsFeed";
+import IdeasFeed from "@/components/ideas/IdeasFeed";
+import TimelineFeed from "@/components/timeline/TimelineFeed";
 import Dock from "@/components/dock/dock";
 import GradientBlur from "@/components/gradientBlur/gradientBlur";
 import AboutModal from "@/components/aboutModal/AboutModal";
@@ -36,7 +38,7 @@ function HomeContent() {
   const { openModal: openVoiceModal } = useVoiceModal();
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
   const [imageIndex, setImageIndex] = useState<number>(0);
-  const WALLPAPERS = ["/wallpapers/pexels-sergei-31959340.jpg", "/bg.jpg", "/wallpapers/bg1.jpg", "/wallpapers/bg2.jpg", "/wallpapers/bg3.jpg", "/wallpapers/bg4.jpg"];
+  const WALLPAPERS = ["/wallpapers/pexels-sergei-31959340.jpg", "/bg.jpg", "/wallpapers/bg1.jpg", "/wallpapers/bg2.jpg", "/wallpapers/bg3.jpg", "/wallpapers/bg4.jpg", "/wallpapers/god.jpg"];
   const bgImage = WALLPAPERS[imageIndex];
 
   // Screenshot State
@@ -46,6 +48,8 @@ function HomeContent() {
   // Project Expansion State
   const [expandedProject, setExpandedProject] = useState<string | null>(null);
   const [isPostsOpen, setIsPostsOpen] = useState(false);
+  const [isIdeasOpen, setIsIdeasOpen] = useState(false);
+  const [isTimelineOpen, setIsTimelineOpen] = useState(false);
   const getProjectLayoutId = useCallback((slug: string) => `project-card-${slug}`, []);
 
   const searchParams = useSearchParams();
@@ -77,7 +81,7 @@ function HomeContent() {
 
     const newPathname = window.location.pathname + (params.toString() ? `?${params.toString()}` : "");
     router.replace(newPathname, { scroll: false });
-  }, [expandedProject, isPostsOpen, router]);
+  }, [expandedProject, isPostsOpen, isIdeasOpen, isTimelineOpen, router]);
 
   // The function that takes the picture
   const handleScreenshot = useCallback(async () => {
@@ -116,10 +120,12 @@ function HomeContent() {
 
       {/* 1. The Left Sidebar Navigation */}
       <div style={{ zIndex: 10, position: 'relative' }}>
-        <DesktopSidebar 
+        <DesktopSidebar
           onShowPosts={() => setIsPostsOpen(true)}
-          onCollapseProject={() => { setExpandedProject(null); setIsPostsOpen(false); }}
-          activePage={isPostsOpen ? "Post" : (expandedProject ? undefined : "Work")}
+          onShowIdeas={() => setIsIdeasOpen(true)}
+          onShowTimeline={() => setIsTimelineOpen(true)}
+          onCollapseProject={() => { setExpandedProject(null); setIsPostsOpen(false); setIsIdeasOpen(false); setIsTimelineOpen(false); }}
+          activePage={isPostsOpen ? "Certificates" : (isIdeasOpen ? "Ideas" : (isTimelineOpen ? "Timeline" : (expandedProject ? undefined : "Work")))}
         />
       </div>
 
@@ -170,6 +176,8 @@ function HomeContent() {
             onImageToggle={() => setImageIndex((prev) => (prev + 1) % WALLPAPERS.length)}
             onScreenshot={handleScreenshot}
             onShowPosts={() => setIsPostsOpen(true)}
+            onShowIdeas={() => setIsIdeasOpen(true)}
+            onShowTimeline={() => setIsTimelineOpen(true)}
             onWorkClick={() => windowModeState.bringToFront("meshstage")}
           />
         </div>
@@ -190,9 +198,9 @@ function HomeContent() {
           layoutId={expandedProject ? getProjectLayoutId(expandedProject.toLowerCase()) : ""}
         />
 
-        {/* Posts Overlay Window */}
+        {/* Certificates / Ideas / Timeline Overlay Window */}
         <AnimatePresence>
-          {isPostsOpen && (
+          {(isPostsOpen || isIdeasOpen || isTimelineOpen) && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -200,11 +208,11 @@ function HomeContent() {
               style={{ position: 'fixed', inset: 0, zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             >
               {/* Backdrop */}
-              <div 
-                onClick={() => setIsPostsOpen(false)}
-                style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.1)', backdropFilter: 'blur(10px)' }} 
+              <div
+                onClick={() => { setIsPostsOpen(false); setIsIdeasOpen(false); setIsTimelineOpen(false); }}
+                style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.1)', backdropFilter: 'blur(10px)' }}
               />
-              
+
               {/* The Window */}
               <motion.div
                 initial={{ scale: 0.9, opacity: 0 }}
@@ -221,16 +229,16 @@ function HomeContent() {
                   {/* macOS Title bar */}
                   <div style={{ height: '52px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', borderBottom: '1px solid #f2f2f2', background: '#fff', flexShrink: 0 }}>
                     <div style={{ position: 'absolute', left: '16px', display: 'flex', gap: '8px' }}>
-                      <div onClick={() => setIsPostsOpen(false)} style={{ width: 12, height: 12, borderRadius: 6, background: '#ff5f56', cursor: 'pointer' }} />
+                      <div onClick={() => { setIsPostsOpen(false); setIsIdeasOpen(false); setIsTimelineOpen(false); }} style={{ width: 12, height: 12, borderRadius: 6, background: '#ff5f56', cursor: 'pointer' }} />
                       <div style={{ width: 12, height: 12, borderRadius: 6, background: '#ffbd2e' }} />
                       <div style={{ width: 12, height: 12, borderRadius: 6, background: '#27c93f' }} />
                     </div>
-                    <div style={{ fontSize: '14px', fontWeight: 600, color: '#111' }}>Posts</div>
+                    <div style={{ fontSize: '14px', fontWeight: 600, color: '#111' }}>{isIdeasOpen ? 'Ideas' : (isTimelineOpen ? 'Timeline' : 'Certificates')}</div>
                   </div>
 
                   {/* Content area */}
                   <div style={{ flex: 1, overflow: 'hidden', position: 'relative' }}>
-                    <PostsFeed />
+                    {isIdeasOpen ? <IdeasFeed /> : (isTimelineOpen ? <TimelineFeed /> : <PostsFeed />)}
                   </div>
                 </Squircle>
               </motion.div>
@@ -242,7 +250,7 @@ function HomeContent() {
 
         <Dock
           mode="multi"
-          projects={PROJECTS}
+          projects={PROJECTS.filter((p) => !p.hidden)}
           isVisible={true}
           openWindows={windowModeState.openWindows}
           onIconClick={(slug) => {

@@ -7,6 +7,9 @@ export type ProjectContent = {
     demo?: string;
     demoPoster?: string;
     disabled?: boolean;
+    // Reachable via its case study route, but not surfaced in the Dock or
+    // the floating card stack — used for timeline-only entries.
+    hidden?: boolean;
 };
 
 export const PROJECTS: ProjectContent[] = [
@@ -15,6 +18,7 @@ export const PROJECTS: ProjectContent[] = [
         slug: "meshstage",
         description: "Full-stack computational geometry pipeline generating watertight, isotropic 3D surface meshes from raw CAD data (STEP/IGES) with FEA validation.",
         tags: ["C++", "OpenCASCADE", "Three.js"],
+        video: "/videos/meshstage-card-preview.mp4",
         demoPoster: "/images/meshstage/meshstage-poster.webp"
     },
     {
@@ -38,5 +42,12 @@ export const PROJECTS: ProjectContent[] = [
         description: "Emergency resource discovery platform with real-time, geolocation-driven REST APIs and low-latency data delivery.",
         tags: ["Backend", "REST APIs"],
         demoPoster: "/images/safeconnect/safeconnect-poster.webp"
+    },
+    {
+        name: "Ambiguity Labs",
+        slug: "ambiguity-labs",
+        description: "SDE Intern authoring technical benchmark tasks for Snorkel AI's agent evaluation platform — Dockerized environments, oracle solutions, and automated verifiers across Python, Go, Ruby, TypeScript, and C++.",
+        tags: ["Python", "Go", "Ruby", "TypeScript", "C++"],
+        hidden: true
     }
 ];

@@ -17,6 +17,8 @@ interface MobileControlsProps {
   onImageToggle?: () => void;
   onScreenshot?: () => void;
   onShowPosts?: () => void;
+  onShowIdeas?: () => void;
+  onShowTimeline?: () => void;
   onWorkClick?: () => void;
 }
 
@@ -34,6 +36,8 @@ export default function MobileControls({
   onImageToggle,
   onScreenshot,
   onShowPosts,
+  onShowIdeas,
+  onShowTimeline,
   onWorkClick,
 }: MobileControlsProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -203,6 +207,48 @@ export default function MobileControls({
               </button>
 
               <button
+                onClick={() => { setIsMenuOpen(false); onShowTimeline?.(); }}
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "#fff",
+                  padding: "10px 12px",
+                  textAlign: "left",
+                  fontSize: "15px",
+                  fontWeight: 500,
+                  borderRadius: "10px",
+                  cursor: "pointer",
+                  width: "100%",
+                  transition: "background 0.15s ease"
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.background = "rgba(255, 255, 255, 0.08)"}
+                onMouseLeave={(e) => e.currentTarget.style.background = "none"}
+              >
+                Timeline
+              </button>
+
+              <button
+                onClick={() => { setIsMenuOpen(false); onShowIdeas?.(); }}
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "#fff",
+                  padding: "10px 12px",
+                  textAlign: "left",
+                  fontSize: "15px",
+                  fontWeight: 500,
+                  borderRadius: "10px",
+                  cursor: "pointer",
+                  width: "100%",
+                  transition: "background 0.15s ease"
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.background = "rgba(255, 255, 255, 0.08)"}
+                onMouseLeave={(e) => e.currentTarget.style.background = "none"}
+              >
+                Ideas
+              </button>
+
+              <button
                 onClick={() => { setIsMenuOpen(false); onShowPosts?.(); }}
                 style={{
                   background: "none",
@@ -220,11 +266,11 @@ export default function MobileControls({
                 onMouseEnter={(e) => e.currentTarget.style.background = "rgba(255, 255, 255, 0.08)"}
                 onMouseLeave={(e) => e.currentTarget.style.background = "none"}
               >
-                Post
+                Certificates
               </button>
 
               <a
-                href="https://drive.google.com/file/d/1Rajt_0Jg-7ywpB0bX3N1JPgLXnW3uPiF/view?usp=sharing"
+                href="https://drive.google.com/file/d/1-3hVwC3ftoJ5wIFMDtVSnAeZm1INa-SA/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
