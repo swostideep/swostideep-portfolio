@@ -56,3 +56,6 @@ Surrounding/
 
 # Local Claude Code settings (may contain tokens/secrets — never commit)
 .claude/
+
+# Locally downloaded Node runtime (not part of the project)
+.node-runtime/
