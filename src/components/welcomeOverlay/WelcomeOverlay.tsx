@@ -52,6 +52,7 @@ export default function WelcomeOverlay() {
       '/bg.jpg', '/wallpapers/pexels-sergei-31959340.jpg',
       '/wallpapers/bg1.jpg', '/wallpapers/bg2.jpg',
       '/wallpapers/bg3.jpg', '/wallpapers/bg4.jpg',
+      '/wallpapers/god.jpg',
       '/feedback-gradient.jpg', '/icon.png',
     ];
     imagePaths.forEach((src) => { const img = new Image(); img.src = src; });
