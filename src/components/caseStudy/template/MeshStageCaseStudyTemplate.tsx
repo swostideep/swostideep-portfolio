@@ -2,25 +2,14 @@
 import React from "react";
 import Image from "next/image";
 import CaseStudyHeader from "../blocks/CaseStudyHeader";
+import ScrubVideo from "../blocks/ScrubVideo";
 import classes from "./caseStudy.module.css";
 import { useVoiceModal } from "@/app/contexts/VoiceModalContext";
 import { useIsMobile } from "@/app/hooks/useIsMobile";
 import {
   CheckCircle2, ArrowRight, Cpu, Boxes, Globe,
-  FileBox, Triangle, ListOrdered, MonitorPlay, ImageIcon
+  FileBox, Triangle, ListOrdered, MonitorPlay
 } from "lucide-react";
-
-// Media placeholder — swap for a real screenshot/video by dropping the file in
-// public/images/meshstage/ and replacing this block with an <Image /> like the
-// hero below.
-function MediaPlaceholder({ label, height = 260 }: { label: string; height?: number }) {
-  return (
-    <div style={{ height, background: '#f8fafc', borderRadius: '8px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', border: '1px dashed #cbd5e1' }}>
-      <ImageIcon size={32} color="#94a3b8" style={{ marginBottom: '12px' }} />
-      <span style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 600 }}>{label}</span>
-    </div>
-  );
-}
 
 export default function MeshStageCaseStudyTemplate() {
   const { openModal } = useVoiceModal();
@@ -37,13 +26,20 @@ export default function MeshStageCaseStudyTemplate() {
         <CaseStudyHeader
           title="MeshStage"
           subtitle="A geometry meshing engine — from raw STEP/IGES CAD files to watertight, isotropic, FEA-ready surface meshes in the browser."
-          tags={["C++ · OpenCASCADE", "Node.js · Redis (BullMQ)", "Three.js (WebGL)", "Sept 2025 – April 2026"]}
+          tags={["C++ · OpenCASCADE", "Node.js · Redis (BullMQ)", "Three.js (WebGL)", "Sept 2025 – Apr 28, 2026"]}
           onVoiceModeClick={openModal}
         />
 
-        {/* Hero Image */}
+        {/* Hero Video */}
         <div style={{ width: isMobile ? '100%' : 'calc(100% + 80px)', marginLeft: isMobile ? 0 : '-40px', marginBottom: '100px', borderRadius: '16px', overflow: 'hidden' }}>
-          <Image src="/images/meshstage/meshstage-poster.webp" alt="MeshStage meshing engine" width={1600} height={1000} sizes="(max-width: 768px) 100vw, 90vw" priority style={{ width: '100%', height: 'auto', display: 'block' }} />
+          <video
+            src="/videos/meshstage-card-preview.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            style={{ width: '100%', height: 'auto', display: 'block' }}
+          />
         </div>
 
       </div>
@@ -160,11 +156,28 @@ export default function MeshStageCaseStudyTemplate() {
             ))}
           </div>
 
-          {/* Media slots — real screenshots/renders drop in here */}
-          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '24px' }}>
-            <MediaPlaceholder label="Screenshot: Mesh quality heatmap (coming soon)" />
-            <MediaPlaceholder label="Screenshot: CAD upload → mesh result (coming soon)" />
+          {/* Screenshots: heatmap + raw mesh result */}
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '24px', marginBottom: '40px' }}>
+            <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid #e2e8f0' }}>
+              <Image src="/images/meshstage/meshstage-shot-1.webp" alt="Mesh quality heatmap in the WebGL viewer" width={1904} height={991} sizes="(max-width: 768px) 100vw, 45vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
+              <div style={{ padding: '14px 18px', background: '#fff', fontSize: '0.8rem', color: '#64748b', borderTop: '1px solid #e2e8f0' }}>
+                FEA quality heatmap on a meshed valve assembly — 1.2M elements, zero bad elements.
+              </div>
+            </div>
+            <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid #e2e8f0' }}>
+              <Image src="/images/meshstage/meshstage-shot-2.webp" alt="CAD upload meshed into a surface result" width={1909} height={984} sizes="(max-width: 768px) 100vw, 45vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
+              <div style={{ padding: '14px 18px', background: '#fff', fontSize: '0.8rem', color: '#64748b', borderTop: '1px solid #e2e8f0' }}>
+                Raw STEP upload meshed into a clean, watertight surface — ready for FEA.
+              </div>
+            </div>
           </div>
+
+          {/* Master product walkthrough video */}
+          <ScrubVideo
+            src="/videos/meshstage-master.mp4"
+            caption="Full product walkthrough — upload, mesh, and inspect a CAD part end to end."
+            isMobile={isMobile}
+          />
         </div>
       </div>
 
@@ -223,6 +236,46 @@ export default function MeshStageCaseStudyTemplate() {
               </li>
             ))}
           </ul>
+        </div>
+      </div>
+
+      {/* ============================================================
+          SECTION 5: PRODUCT IN ACTION
+          ============================================================ */}
+      <div style={{ background: '#f8fafc', borderTop: '1px solid #e2e8f0' }}>
+        <div className={classes.contentMaxWidth} style={{ padding: isMobile ? '60px 0' : '100px 0', maxWidth: '1000px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+            <div style={{ width: '24px', height: '2px', background: '#0ea5e9' }} />
+            <span style={{ fontSize: '0.7rem', fontWeight: 600, color: '#64748b', letterSpacing: '0.1em' }}>04 - PRODUCT IN ACTION</span>
+          </div>
+          <h2 className={classes.htmlH2}>
+            The viewer,<br />
+            <span style={{ fontStyle: 'italic', color: 'var(--primary-color)' }}>up close.</span>
+          </h2>
+          <p style={{ fontSize: '1rem', color: '#475569', lineHeight: 1.6, maxWidth: '80%', marginBottom: '48px' }}>
+            X-ray transparency mode lets an engineer see straight through a meshed assembly to check internal surfaces without hiding a single part.
+          </p>
+
+          <ScrubVideo
+            src="/videos/meshstage-walkthrough.mp4"
+            caption="A closer look at the mesh viewer — X-ray transparency, cross-sections, and live diagnostic reporting."
+            isMobile={isMobile}
+          />
+
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '24px', marginTop: '40px' }}>
+            <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid #e2e8f0' }}>
+              <Image src="/images/meshstage/meshstage-shot-3.webp" alt="X-ray transparency view of a meshed valve assembly" width={1903} height={985} sizes="(max-width: 768px) 100vw, 45vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
+              <div style={{ padding: '14px 18px', background: '#fff', fontSize: '0.8rem', color: '#64748b', borderTop: '1px solid #e2e8f0' }}>
+                Transparency dialed down to reveal internal surfaces through the mesh wireframe.
+              </div>
+            </div>
+            <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid #e2e8f0' }}>
+              <Image src="/images/meshstage/meshstage-shot-4.webp" alt="Wireframe view of a meshed valve handle assembly" width={1899} height={982} sizes="(max-width: 768px) 100vw, 45vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
+              <div style={{ padding: '14px 18px', background: '#fff', fontSize: '0.8rem', color: '#64748b', borderTop: '1px solid #e2e8f0' }}>
+                Full wireframe render — every triangle in the 1.2M-element mesh, rendered live in WebGL.
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
