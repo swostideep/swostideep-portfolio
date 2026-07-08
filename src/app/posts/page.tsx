@@ -57,7 +57,7 @@ export default function PostsPage() {
               <div style={{ width: 12, height: 12, borderRadius: 6, background: "#27c93f" }} />
             </div>
             {/* Title */}
-            <div style={{ fontSize: "14px", fontWeight: 600, color: "#111" }}>Posts</div>
+            <div style={{ fontSize: "14px", fontWeight: 600, color: "#111" }}>Certificates</div>
           </div>
 
           {/* The content area */}

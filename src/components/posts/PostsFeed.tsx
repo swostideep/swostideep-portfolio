@@ -8,75 +8,29 @@ const POSTS = [
   {
     id: "1",
     author: "Swosti",
-    avatar: "/avatar.jpg", 
-    location: "New Delhi, India",
-    time: "2 w",
-    content: "New text-to-image AI models unlocked powerful ways to overcome user adoption barriers. I combined them with intuitive voice input to let users generate rich materials and virtual environments in real-time. Final features below!",
-    mediaUrl: "/jckkcfj.webp", 
+    avatar: "/avatar.jpeg",
+    location: "Gandhinagar, Gujarat",
+    time: "Aug 2025",
+    content: "Certificate of Participation — 24 hrs Odoo Hackathon 2025, presented by Odoo.",
+    mediaUrl: "/images/posts/certificate-odoo-hackathon.png",
     detailedContent: `
-      <h2>The Evolution of Generative Interfaces</h2>
-      <p>Design systems were built to scale manual interface creation. They're now content fodder for AI. The perfect worker for parsing components, outlining specs, and shuffling identical boxes around. One that doesn't complain about the boring parts of it all.</p>
-      
-      <img src="/images/posts/post-2.jpg" alt="Analog Intentions" style="width: 100%; border-radius: 16px; margin: 32px 0;" />
-      
-      <p>Now it's starting to kill them off. Imagine building yet another form that looks like all the other forms. This is as refreshing as competitive clicking accept on cookie banners.</p>
-      
-      <img src="/images/posts/post-3.jpg" alt="Spatial Gadget Prototype" style="width: 100%; border-radius: 16px; margin: 32px 0;" />
-      
-      <p>You can generate a design system using AI, build a complex dashboard and then realize nobody really needs it anymore. AI ate its own tail when it comes to generative user interfaces.</p>
-      
-      <h3>The End of the Static Grid</h3>
-      <p>We're moving towards a world where interfaces are as fluid as the data they represent. No more fixed layouts, just intent-driven generation.</p>
-      
-      <img src="/images/posts/post-4.jpg" alt="Design System Breakdown" style="width: 100%; border-radius: 16px; margin: 32px 0;" />
-      
-      <p>By leveraging large multimodal models, we can translate user intent directly into functional UI patterns. This reduces the friction between thought and action, allowing for a more creative and productive experience.</p>
-      <div style="height: 60px;"></div>
+      <h2>Odoo Hackathon 2025</h2>
+      <p>Certificate of Participation for the 24-hour Odoo Hackathon, held August 11–12, 2025 in Gandhinagar, Gujarat.</p>
+      <img src="/images/posts/certificate-odoo-hackathon.png" alt="Odoo Hackathon Certificate" style="width: 100%; border-radius: 16px; margin: 32px 0;" />
     `
   },
   {
     id: "2",
     author: "Swosti",
-    avatar: "/avatar.jpg",
-    location: "New Delhi, India",
-    time: "3 w",
-    content: "Exploring the beauty of physical tactile interactions. How can we bring the satisfying 'click' of an analog calendar into the digital realm?",
-    mediaUrl: "/images/posts/post-2.jpg",
+    avatar: "/avatar.jpeg",
+    location: "IIT Delhi",
+    time: "Aug 2025",
+    content: "Certificate of Completion — Summer Internship at the DESCINED Lab, Department of Design, IIT Delhi, where I contributed to building a VR-based training simulator.",
+    mediaUrl: "/images/posts/certificate-iitd-internship.png",
     detailedContent: `
-      <h2>Tactile Analogies in Digital Space</h2>
-      <p>There is a specific joy in physical objects—the weight, the resistance, and the definitive state of a mechanical switch. As we move deeper into glass-slab interfaces, we risk losing this grounding connection.</p>
-      <img src="/images/posts/post-2.jpg" alt="Analog Calendar" style="width: 100%; border-radius: 16px; margin: 32px 0;" />
-      <p>Our research focuses on haptic feedback loops that simulate these physical constraints. When you scroll through a list in Antigravity, the friction is modeled after real-world physics, making the digital feel tangible.</p>
-    `
-  },
-  {
-    id: "3",
-    author: "Swosti",
-    avatar: "/avatar.jpg",
-    location: "New Delhi, India",
-    time: "4 w",
-    content: "Latest hardware prototype for our spatial computing agent. A dedicated physical node for ambient intelligence.",
-    mediaUrl: "/images/posts/post-3.jpg",
-    detailedContent: `
-      <h2>Ambient Intelligence: Beyond the Screen</h2>
-      <p>The screen shouldn't be the only way we interact with AI. This prototype explores a dedicated physical form for our design agent—a device that lives on your desk and communicates through light, sound, and subtle motion.</p>
-      <img src="/images/posts/post-3.jpg" alt="Spatial Gadget" style="width: 100%; border-radius: 16px; margin: 32px 0;" />
-      <p>This 'spatial node' acts as a bridge between your physical environment and your digital workspace. It can sense your presence, adjust your lighting, and even 'whisper' design suggestions as you work.</p>
-    `
-  },
-  {
-    id: "4",
-    author: "Swosti",
-    avatar: "/avatar.jpg",
-    location: "New Delhi, India",
-    time: "5 w",
-    content: "Breaking down the mechanics of our new design system. Every component is now a living entity with its own behavioral logic.",
-    mediaUrl: "/images/posts/post-4.jpg",
-    detailedContent: `
-      <h2>Deconstructing the Design System</h2>
-      <p>Traditional design systems are static libraries of assets. Our new approach treats components as living organisms. They don't just have styles; they have behaviors, states, and contextual awareness.</p>
-      <img src="/images/posts/post-4.jpg" alt="System Breakdown" style="width: 100%; border-radius: 16px; margin: 32px 0;" />
-      <p>By breaking down the DNA of a component—its material properties, transparency, and interaction logic—we can generate infinite variations that remain consistent with the core brand identity.</p>
+      <h2>Summer Internship — IIT Delhi</h2>
+      <p>Certificate of Completion of Summer Internship, awarded by Prof. Srinivasan Venkataraman, Department of Design, Indian Institute of Technology Delhi (DESCINED Lab), for the period 19 May – 16 July, 2025. Contributed to building a Virtual Reality-based training simulator.</p>
+      <img src="/images/posts/certificate-iitd-internship.png" alt="IIT Delhi Internship Certificate" style="width: 100%; border-radius: 16px; margin: 32px 0;" />
     `
   }
 ];
@@ -130,7 +84,7 @@ export default function PostsFeed() {
 
                   {/* Post Media: 4/3 aspect ratio */}
                   <motion.div layoutId={`post-media-${post.id}`} style={{ position: "relative", width: "100%", aspectRatio: "4/3", borderRadius: "12px", overflow: "hidden", marginBottom: "14px", background: "#f0f0f0" }}>
-                    <Image src={post.mediaUrl} alt="Post media" fill sizes="(max-width: 768px) 90vw, 400px" loading="lazy" style={{ objectFit: "cover" }} />
+                    <Image src={post.mediaUrl} alt="Post media" fill sizes="(max-width: 768px) 90vw, 400px" loading="lazy" style={{ objectFit: "contain" }} />
                     <div style={{ 
                       position: "absolute", 
                       bottom: "12px", 
@@ -220,7 +174,7 @@ export default function PostsFeed() {
                       layoutId={`post-media-${post.id}`} 
                       style={{ position: "relative", width: "100%", aspectRatio: "16/9", borderRadius: "16px", overflow: "hidden", marginBottom: "24px", background: "#f0f0f0" }}
                     >
-                      <Image src={post.mediaUrl} alt="Post media" fill sizes="(max-width: 768px) 90vw, 700px" loading="lazy" style={{ objectFit: "cover" }} />
+                      <Image src={post.mediaUrl} alt="Post media" fill sizes="(max-width: 768px) 90vw, 700px" loading="lazy" style={{ objectFit: "contain" }} />
                       <button 
                         onClick={() => setExpandedId(null)}
                         style={{ 
