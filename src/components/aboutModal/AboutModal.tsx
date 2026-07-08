@@ -108,7 +108,7 @@ const AboutModal: React.FC = () => {
                                                 <div className={classes.teaserBlock}>
                                                     <span className={classes.teaserEyebrow}>What if...</span>
                                                     <p className={classes.teaserTitle}>
-                                                        I thought I knew Product Design. Then I joined an AI Team
+                                                        I stopped just learning to code and started building things that actually ship
                                                     </p>
                                                 </div>
                                             </Squircle>
@@ -139,13 +139,13 @@ const AboutModal: React.FC = () => {
                                                 {/* Bio container — paragraphs + CTA */}
                                                 <div className={classes.bioContainer}>
                                                     <p className={classes.bioParagraph}>
-                                                        I&apos;m a Product Designer with 2+ years crafting clear, scalable digital experiences.
+                                                        I&apos;m currently in my 4th year of B.Tech at NIT Rourkela, building things and figuring out how they break.
                                                     </p>
                                                     <p className={classes.bioParagraph}>
-                                                        I blend UX research, design, and strategy to solve complex problems and build enjoyable products.
+                                                        I&apos;m passionate about solving real problems with strong logical thinking, clean code, and a lot of trial and error.
                                                     </p>
                                                     <p className={classes.bioParagraph}>
-                                                        Passionate about reducing friction and creating impact, I&apos;m eager to join teams shaping thoughtful, high-impact digital journeys.
+                                                        Whether it&apos;s a hackathon, an internship, or a side project, I&apos;m eager to keep building and learning by doing.
                                                     </p>
 
                                                     {/* CTA */}
