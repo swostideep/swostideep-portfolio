@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import CaseStudyHeader from "../blocks/CaseStudyHeader";
+import ScrubVideo from "../blocks/ScrubVideo";
 import classes from "./caseStudy.module.css";
 import { useVoiceModal } from "@/app/contexts/VoiceModalContext";
 import { useIsMobile } from "@/app/hooks/useIsMobile";
@@ -85,28 +86,27 @@ export default function IITDelhiVRCaseStudyTemplate() {
         </div>
 
         {/* Screenshot Gallery */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px', marginBottom: '40px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px' }}>
           <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid #e2e8f0' }}>
             <Image src="/images/iitd/iitd-tunnel.webp" alt="Drill arm advancing through the mine tunnel" width={1800} height={840} sizes="(max-width: 768px) 100vw, 90vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
             <div style={{ padding: '14px 18px', background: '#f8fafc', fontSize: '0.8rem', color: '#64748b', borderTop: '1px solid #e2e8f0' }}>
               The jumbo drill advancing through the timber-supported tunnel — every prop, light, and support beam placed to mirror a real underground mine.
             </div>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '24px' }}>
-            <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid #e2e8f0' }}>
-              <Image src="/images/iitd/iitd-cockpit.webp" alt="Operator cockpit view with joysticks" width={1800} height={845} sizes="(max-width: 768px) 100vw, 45vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
-              <div style={{ padding: '14px 18px', background: '#f8fafc', fontSize: '0.8rem', color: '#64748b', borderTop: '1px solid #e2e8f0' }}>
-                First-person cockpit: physical joysticks mapped to XR controller input.
-              </div>
-            </div>
-            <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid #e2e8f0' }}>
-              <Image src="/images/iitd/iitd-drill-closeup.webp" alt="Drill bit close-up during a drilling mission" width={1800} height={843} sizes="(max-width: 768px) 100vw, 45vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
-              <div style={{ padding: '14px 18px', background: '#f8fafc', fontSize: '0.8rem', color: '#64748b', borderTop: '1px solid #e2e8f0' }}>
-                Drilling logic up close — bit alignment, contact detection, and hole placement.
-              </div>
+          <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid #e2e8f0' }}>
+            <Image src="/images/iitd/iitd-cockpit.webp" alt="Operator cockpit view with joysticks" width={1800} height={845} sizes="(max-width: 768px) 100vw, 90vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
+            <div style={{ padding: '14px 18px', background: '#f8fafc', fontSize: '0.8rem', color: '#64748b', borderTop: '1px solid #e2e8f0' }}>
+              First-person cockpit: physical joysticks mapped to XR controller input.
             </div>
           </div>
         </div>
+
+        {/* Drill Video */}
+        <ScrubVideo
+          src="/videos/drill-movement.mp4"
+          caption="Drilling logic up close — bit alignment, contact detection, and hole placement."
+          isMobile={isMobile}
+        />
       </div>
 
       {/* ============================================================
