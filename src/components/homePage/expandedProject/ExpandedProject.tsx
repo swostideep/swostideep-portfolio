@@ -6,6 +6,7 @@ import MeshStageCaseStudyTemplate from "@/components/caseStudy/template/MeshStag
 import IITDelhiVRCaseStudyTemplate from "@/components/caseStudy/template/IITDelhiVRCaseStudyTemplate";
 import CreditRiskCaseStudyTemplate from "@/components/caseStudy/template/CreditRiskCaseStudyTemplate";
 import SafeConnectCaseStudyTemplate from "@/components/caseStudy/template/SafeConnectCaseStudyTemplate";
+import AmbiguityLabsCaseStudyTemplate from "@/components/caseStudy/template/AmbiguityLabsCaseStudyTemplate";
 import classes from "./expandedProject.module.css";
 interface ExpandedProjectProps {
     projectName: string | null;
@@ -53,8 +54,9 @@ export default function ExpandedProject({ projectName, onClose, layoutId }: Expa
                             {(projectName?.toLowerCase() === 'iit delhi vr' || projectName?.toLowerCase() === 'iitd-vr') && <IITDelhiVRCaseStudyTemplate />}
                             {(projectName?.toLowerCase() === 'credit risk analyzer' || projectName?.toLowerCase() === 'credit-risk') && <CreditRiskCaseStudyTemplate />}
                             {projectName?.toLowerCase() === 'safeconnect' && <SafeConnectCaseStudyTemplate />}
+                            {projectName?.toLowerCase() === 'ambiguity labs' && <AmbiguityLabsCaseStudyTemplate />}
                             {/* Fallback for other projects temporarily */}
-                            {projectName && !['meshstage', 'iit delhi vr', 'iitd-vr', 'credit risk analyzer', 'credit-risk', 'safeconnect'].includes(projectName.toLowerCase()) && (
+                            {projectName && !['meshstage', 'iit delhi vr', 'iitd-vr', 'credit risk analyzer', 'credit-risk', 'safeconnect', 'ambiguity labs'].includes(projectName.toLowerCase()) && (
                                 <div style={{ padding: "60px", textAlign: "center", color: "rgba(0,0,0,0.5)" }}>
                                     Case study for {projectName} is currently under construction.
                                 </div>
