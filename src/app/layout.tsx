@@ -17,7 +17,7 @@ const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 
 export const metadata = {
   title: "Swosti - Portfolio",
-  description: "Design engineer crafting AI-native interfaces.",
+  description: "Software developer who turns \"that's impossible\" into a pull request.",
   icons: {
     icon: [
       { url: "/favicon.ico" },
