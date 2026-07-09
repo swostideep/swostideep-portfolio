@@ -13,6 +13,19 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 31536000,
     dangerouslyAllowSVG: true,
   },
+  // Static media only ever changes with a filename change, so let browsers
+  // and Vercel's edge cache hold it for a year — repeat visits skip the
+  // download entirely and videos replay straight from cache.
+  async headers() {
+    return [
+      {
+        source: "/:dir(videos|wallpapers|images|audio)/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
