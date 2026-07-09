@@ -5,6 +5,35 @@ import classes from "./caseStudy.module.css";
 import { useVoiceModal } from "@/app/contexts/VoiceModalContext";
 import { useIsMobile } from "@/app/hooks/useIsMobile";
 import { ArrowRight, CheckCircle2, MapPin, Radio, Timer } from "lucide-react";
+import CodeShowcase from "../blocks/CodeShowcase";
+
+const NEARBY_ROUTE_CODE = `router.get('/api/v1/resources/nearby', async (req, res) => {
+  const { lat, lng, radiusKm = 5, type } = req.query;
+  if (!lat || !lng) {
+    return res.status(400).json({ error: 'lat and lng are required' });
+  }
+
+  const query = {
+    location: {
+      $near: {
+        $geometry: { type: 'Point', coordinates: [Number(lng), Number(lat)] },
+        $maxDistance: Number(radiusKm) * 1000,
+      },
+    },
+    ...(type && { type }),
+    available: true,
+  };
+
+  const resources = await Resource.find(query)
+    .select('name type location contact lastUpdated')
+    .limit(25)
+    .lean();
+
+  return res.status(200).json({
+    count: resources.length,
+    resources: resources.map(withDistanceFrom(lat, lng)),
+  });
+});`;
 
 export default function SafeConnectCaseStudyTemplate() {
   const { openModal } = useVoiceModal();
@@ -104,6 +133,16 @@ export default function SafeConnectCaseStudyTemplate() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Code showcase */}
+        <div style={{ marginBottom: '64px' }}>
+          <CodeShowcase
+            filename="routes/resources.js"
+            language="javascript"
+            code={NEARBY_ROUTE_CODE}
+            caption="The geolocation query at the core of SafeConnect — a MongoDB $near query resolves a user's coordinates to the nearest available emergency resources."
+          />
         </div>
 
         {/* Outcome */}

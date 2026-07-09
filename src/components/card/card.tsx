@@ -21,8 +21,9 @@ const POSTER_CONTAIN: Record<string, boolean> = {};
 const CARD_BG_COLORS: Record<string, string> = {
     meshstage: "#0f172a",
     "iitd-vr": "#1a1a1a",
-    "credit-risk": "#111827",
-    safeconnect: "#1c1917",
+    "credit-risk": "#faf8f3",
+    safeconnect: "#faf8f3",
+    "ambiguity-labs": "#faf8f3",
 };
 
 const EXIT_ANIMATION = {
@@ -165,7 +166,18 @@ const Card: React.FC<CardProps> = ({
                                                 }}
                                             />
                                         ) : (
-                                            <div style={{ width: '100%', height: '100%', background: '#eaeaea' }} />
+                                            <div style={{ width: '100%', height: '100%', background: cardBg ?? '#eaeaea', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '14px', padding: '32px', boxSizing: 'border-box' }}>
+                                                <span style={{ fontSize: '1.4rem', fontWeight: 700, color: '#1c2b33', textAlign: 'center', lineHeight: 1.25, maxWidth: '92%' }}>{projectName}</span>
+                                                {projectTags && projectTags.length > 0 && (
+                                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center', maxWidth: '88%' }}>
+                                                        {projectTags.map((tag) => (
+                                                            <span key={tag} style={{ fontSize: '0.75rem', color: '#5a6472', background: 'rgba(0,0,0,0.04)', padding: '5px 13px', borderRadius: '100px', border: '1px solid rgba(0,0,0,0.06)' }}>
+                                                                {tag}
+                                                            </span>
+                                                        ))}
+                                                    </div>
+                                                )}
+                                            </div>
                                         )}
                                     </Squircle>
                                     <div className={classes.descriptionWrapper}>

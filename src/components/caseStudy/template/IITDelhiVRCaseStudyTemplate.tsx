@@ -24,7 +24,7 @@ export default function IITDelhiVRCaseStudyTemplate() {
       <div className={classes.contentMaxWidth}>
 
         <CaseStudyHeader
-          title="IIT Delhi VR"
+          title="IIT Delhi - SDE Intern"
           subtitle="A coal-mine safety training simulator — teaching drilling, blasting, and hazard response inside a virtual mine before workers ever face the real one."
           tags={["Unity (C#)", "XR Toolkit", "DESCINED Lab · IIT Delhi", "May – July 2025"]}
           onVoiceModeClick={openModal}

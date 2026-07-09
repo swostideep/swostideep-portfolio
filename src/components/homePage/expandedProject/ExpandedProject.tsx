@@ -51,12 +51,12 @@ export default function ExpandedProject({ projectName, onClose, layoutId }: Expa
                         </div>
                         <div className={classes.content}>
                             {projectName?.toLowerCase() === 'meshstage' && <MeshStageCaseStudyTemplate />}
-                            {(projectName?.toLowerCase() === 'iit delhi vr' || projectName?.toLowerCase() === 'iitd-vr') && <IITDelhiVRCaseStudyTemplate />}
+                            {(projectName?.toLowerCase() === 'iit delhi - sde intern' || projectName?.toLowerCase() === 'iitd-vr') && <IITDelhiVRCaseStudyTemplate />}
                             {(projectName?.toLowerCase() === 'credit risk analyzer' || projectName?.toLowerCase() === 'credit-risk') && <CreditRiskCaseStudyTemplate />}
                             {projectName?.toLowerCase() === 'safeconnect' && <SafeConnectCaseStudyTemplate />}
-                            {projectName?.toLowerCase() === 'ambiguity labs' && <AmbiguityLabsCaseStudyTemplate />}
+                            {projectName?.toLowerCase() === 'ambiguity labs - sde intern' && <AmbiguityLabsCaseStudyTemplate />}
                             {/* Fallback for other projects temporarily */}
-                            {projectName && !['meshstage', 'iit delhi vr', 'iitd-vr', 'credit risk analyzer', 'credit-risk', 'safeconnect', 'ambiguity labs'].includes(projectName.toLowerCase()) && (
+                            {projectName && !['meshstage', 'iit delhi - sde intern', 'iitd-vr', 'credit risk analyzer', 'credit-risk', 'safeconnect', 'ambiguity labs - sde intern'].includes(projectName.toLowerCase()) && (
                                 <div style={{ padding: "60px", textAlign: "center", color: "rgba(0,0,0,0.5)" }}>
                                     Case study for {projectName} is currently under construction.
                                 </div>

@@ -20,7 +20,7 @@ const TIMELINE: TimelineEntry[] = [
     {
         slug: "ambiguity-labs",
         date: "Mar 27 – Aug 10, 2026",
-        title: "Ambiguity Labs",
+        title: "Ambiguity Labs - SDE Intern",
         description: "SDE Intern authoring technical benchmark tasks for Snorkel AI's agent evaluation platform — Docker environments, oracle solutions, and automated verifiers across Python, Go, Ruby, TypeScript, and C++.",
         tags: ["Python", "Go", "Ruby", "TypeScript", "C++"],
         current: true,
@@ -35,7 +35,7 @@ const TIMELINE: TimelineEntry[] = [
     {
         slug: "iitd-vr",
         date: "May – Jul 2025",
-        title: "IIT Delhi VR",
+        title: "IIT Delhi - SDE Intern",
         description: "Coal-mine safety training simulator built at IIT Delhi's DESCINED Lab — Unity, state machines, XR input.",
         tags: ["Unity (C#)", "XR Toolkit", "DESCINED Lab"],
     },
@@ -144,7 +144,7 @@ export default function TimelineFeed() {
                                     <div className={classes.timelineCard} style={{ flex: 1, padding: "16px 18px" }}>
                                         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px", marginBottom: "6px" }}>
                                             <span className={classes.timelineDate}>
-                                                {entry.date}{entry.current ? " · Ongoing" : ""}
+                                                {entry.date}
                                             </span>
                                             <ArrowUpRight size={14} className={classes.timelineArrow} />
                                         </div>

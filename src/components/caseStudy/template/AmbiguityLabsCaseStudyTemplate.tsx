@@ -5,6 +5,57 @@ import classes from "./caseStudy.module.css";
 import { useVoiceModal } from "@/app/contexts/VoiceModalContext";
 import { useIsMobile } from "@/app/hooks/useIsMobile";
 import { ArrowRight, CheckCircle2, Container, FlaskConical, ShieldCheck, Languages } from "lucide-react";
+import CodeShowcase from "../blocks/CodeShowcase";
+
+const VERIFIER_CODE = `def verify(workdir: Path) -> VerifierResult:
+    """Runs the oracle solution and the agent's submission, then diffs output."""
+    oracle_out = run_in_container(workdir / "oracle", timeout=30)
+    agent_out = run_in_container(workdir / "submission", timeout=30)
+
+    if oracle_out.exit_code != 0:
+        raise BenchmarkError("Oracle solution failed to run — task is broken")
+
+    passed = normalize(agent_out.stdout) == normalize(oracle_out.stdout)
+    return VerifierResult(
+        passed=passed,
+        score=1.0 if passed else 0.0,
+        stderr_excerpt=agent_out.stderr[:500],
+    )`;
+
+const ORACLE_GO_CODE = `func Solve(input Graph) (Path, error) {
+	visited := make(map[NodeID]bool, len(input.Nodes))
+	queue := []NodeID{input.Start}
+
+	for len(queue) > 0 {
+		current := queue[0]
+		queue = queue[1:]
+		if current == input.Goal {
+			return reconstructPath(input, current), nil
+		}
+		if visited[current] {
+			continue
+		}
+		visited[current] = true
+		queue = append(queue, input.Neighbors[current]...)
+	}
+	return Path{}, fmt.Errorf("no path from %v to %v", input.Start, input.Goal)
+}`;
+
+const DOCKER_CPP_CODE = `// benchmark harness — compiles and sandboxes a C++ submission
+#include <chrono>
+#include <cstdlib>
+
+int run_submission(const std::string& binary_path, int timeout_sec) {
+    pid_t pid = fork();
+    if (pid == 0) {
+        alarm(timeout_sec);
+        execl(binary_path.c_str(), binary_path.c_str(), nullptr);
+        _exit(127); // exec failed
+    }
+    int status;
+    waitpid(pid, &status, 0);
+    return WIFEXITED(status) ? WEXITSTATUS(status) : -1;
+}`;
 
 export default function AmbiguityLabsCaseStudyTemplate() {
   const { openModal } = useVoiceModal();
@@ -18,7 +69,7 @@ export default function AmbiguityLabsCaseStudyTemplate() {
           ============================================================ */}
       <div className={classes.contentMaxWidth}>
         <CaseStudyHeader
-          title="Ambiguity Labs"
+          title="Ambiguity Labs - SDE Intern"
           subtitle="SDE Intern authoring technical benchmark tasks for Snorkel AI's agent evaluation platform — the test suite that decides whether an AI agent actually works."
           tags={["Python", "Go", "Ruby", "TypeScript", "C++", "March – August 2026"]}
           onVoiceModeClick={openModal}
@@ -120,6 +171,32 @@ export default function AmbiguityLabsCaseStudyTemplate() {
             tooling, and failure modes — from Go's static typing and C++'s manual memory management, to Ruby and
             TypeScript's dynamic and structural typing. Polyglot fluency wasn't a nice-to-have here; it was the job.
           </p>
+        </div>
+
+        {/* Code showcase — same verifier pattern, three different languages */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginBottom: '64px' }}>
+          <CodeShowcase
+            filename="verifier.py"
+            language="python"
+            code={VERIFIER_CODE}
+            caption="A verifier script — runs the oracle solution and the agent's submission in isolated containers, then diffs the output to score the attempt."
+          />
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '24px', alignItems: 'stretch' }}>
+            <CodeShowcase
+              filename="oracle_solution.go"
+              language="go"
+              code={ORACLE_GO_CODE}
+              codeHeight={280}
+              caption="A Go oracle solution — the reference implementation every submission gets scored against."
+            />
+            <CodeShowcase
+              filename="harness.cpp"
+              language="cpp"
+              code={DOCKER_CPP_CODE}
+              codeHeight={280}
+              caption="The C++ side of the sandboxed benchmark harness — fork, exec, and enforce the timeout."
+            />
+          </div>
         </div>
 
         {/* Outcome */}

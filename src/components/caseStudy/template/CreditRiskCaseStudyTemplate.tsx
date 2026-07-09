@@ -5,6 +5,33 @@ import classes from "./caseStudy.module.css";
 import { useVoiceModal } from "@/app/contexts/VoiceModalContext";
 import { useIsMobile } from "@/app/hooks/useIsMobile";
 import { ArrowRight, CheckCircle2, ShieldCheck, Braces, Database } from "lucide-react";
+import CodeShowcase from "../blocks/CodeShowcase";
+
+const SCORING_ROUTE_CODE = `router.post('/api/v1/applications/:id/score', authenticate, async (req, res) => {
+  const application = await Application.findById(req.params.id);
+  if (!application) return res.status(404).json({ error: 'Application not found' });
+
+  const features = normalizeFeatures(application.rawInput);
+  const { score, band } = await riskModel.predict(features);
+
+  const decision = evaluatePolicy(score, band, application.requestedAmount);
+
+  await Decision.create({
+    applicationId: application._id,
+    score,
+    band,
+    outcome: decision.outcome,
+    reasons: decision.reasons,
+    modelVersion: riskModel.version,
+  });
+
+  return res.status(200).json({
+    applicationId: application._id,
+    score,
+    outcome: decision.outcome,
+    reasons: decision.reasons,
+  });
+});`;
 
 export default function CreditRiskCaseStudyTemplate() {
   const { openModal } = useVoiceModal();
@@ -104,6 +131,16 @@ export default function CreditRiskCaseStudyTemplate() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Code showcase */}
+        <div style={{ marginBottom: '64px' }}>
+          <CodeShowcase
+            filename="routes/applications.js"
+            language="javascript"
+            code={SCORING_ROUTE_CODE}
+            caption="The core scoring route — validates the application, runs it through the risk model, applies decision policy, and persists an auditable record."
+          />
         </div>
 
         {/* Outcome */}

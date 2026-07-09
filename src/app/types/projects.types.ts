@@ -7,9 +7,6 @@ export type ProjectContent = {
     demo?: string;
     demoPoster?: string;
     disabled?: boolean;
-    // Reachable via its case study route, but not surfaced in the Dock or
-    // the floating card stack — used for timeline-only entries.
-    hidden?: boolean;
 };
 
 export const PROJECTS: ProjectContent[] = [
@@ -22,7 +19,7 @@ export const PROJECTS: ProjectContent[] = [
         demoPoster: "/images/meshstage/meshstage-poster.webp"
     },
     {
-        name: "IIT Delhi VR",
+        name: "IIT Delhi - SDE Intern",
         slug: "iitd-vr",
         description: "VR coal-mine safety training simulator built in Unity (C#) at IIT Delhi's DESCINED Lab — state machines, event-driven architecture, and XR Toolkit input systems.",
         tags: ["Unity", "C#", "XR"],
@@ -33,21 +30,18 @@ export const PROJECTS: ProjectContent[] = [
         name: "Credit Risk Analyzer",
         slug: "credit-risk",
         description: "Scalable RESTful backend integrating ML-based risk scoring models for automated credit decisioning.",
-        tags: ["Node.js", "MongoDB", "REST"],
-        demoPoster: "/images/credit-risk/credit-risk-poster.webp"
+        tags: ["Node.js", "MongoDB", "REST"]
     },
     {
         name: "SafeConnect",
         slug: "safeconnect",
         description: "Emergency resource discovery platform with real-time, geolocation-driven REST APIs and low-latency data delivery.",
-        tags: ["Backend", "REST APIs"],
-        demoPoster: "/images/safeconnect/safeconnect-poster.webp"
+        tags: ["Backend", "REST APIs"]
     },
     {
-        name: "Ambiguity Labs",
+        name: "Ambiguity Labs - SDE Intern",
         slug: "ambiguity-labs",
         description: "SDE Intern authoring technical benchmark tasks for Snorkel AI's agent evaluation platform — Dockerized environments, oracle solutions, and automated verifiers across Python, Go, Ruby, TypeScript, and C++.",
-        tags: ["Python", "Go", "Ruby", "TypeScript", "C++"],
-        hidden: true
+        tags: ["Python", "Go", "Ruby", "TypeScript", "C++"]
     }
 ];
