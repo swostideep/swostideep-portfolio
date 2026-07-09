@@ -7,13 +7,16 @@ import classes from "./voiceModal.module.css";
 // Delay before audio starts — gives a breath before voice kicks in
 const AUDIO_PRE_ROLL = 400; // ms
 
+// Delays measured directly from the audio's own silence gaps (ffmpeg
+// silencedetect), not estimated — each segment starts right as its
+// predecessor's trailing pause ends.
 const SCRIPT = [
     { text: "", delay: 0 },
-    { text: "Hey, I'm Swosti.", delay: 400 },
-    { text: "I'm an AI Product Designer turning complex models into intuitive, human-centric experiences.", delay: 2400 },
-    { text: "Over the past two years, I've designed scalable B2B and B2C systems that reduce friction and drive measurable impact.", delay: 8400 },
-    { text: "I'm currently exploring new opportunities. Let's build something meaningful.", delay: 15400 },
-    { text: "", delay: 19600 }
+    { text: "Hey, I'm Swosti.", delay: 0 },
+    { text: "I'm a software developer who turns \"that's impossible\" into a pull request.", delay: 1822 },
+    { text: "Right now I'm a 4th year at NIT Rourkela, building things like MeshStage and solving complex engineering problems with clean, scalable code.", delay: 6995 },
+    { text: "I care about strong logical thinking, clean code, and shipping fast without breaking things.", delay: 16469 },
+    { text: "", delay: 21860 }
 ];
 
 // ── Per-segment auto-calibrated timing ──
@@ -58,7 +61,7 @@ export default function VoiceModal() {
     const rafRef = useRef<number>(0);
 
     useEffect(() => {
-        audioRef.current = new Audio("/audio/voice-mode-ishan-new.mp3");
+        audioRef.current = new Audio("/audio/voice-mode-swosti.mp3");
         audioRef.current.onended = () => {
             setIsPlaying(false);
             cancelAnimationFrame(rafRef.current);
