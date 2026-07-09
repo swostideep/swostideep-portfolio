@@ -5,11 +5,11 @@ import classes from "./welcomeOverlay.module.css";
 
 const FULL_TEXT = `Welcome to my digital workspace..
 
-Hey I'm Swosti...
+Hey I'm Swosti, a software developer who turns "that's impossible" into a pull request...
 
-This entire portfolio is built with AI and is still evolving.
+This space is still evolving, just like everything I build.
 
-Dive in, interact with the sliders and case studies, and help shape it by sharing your feedback.`;
+Dive in, explore the projects and timeline, and help shape it by sharing your feedback.`;
 
 export default function WelcomeOverlay() {
   const [mounted, setMounted] = useState(false);   // DOM presence
@@ -49,10 +49,7 @@ export default function WelcomeOverlay() {
   useEffect(() => {
     if (!mounted) return;
     const imagePaths = [
-      '/bg.jpg', '/wallpapers/pexels-sergei-31959340.jpg',
-      '/wallpapers/bg1.jpg', '/wallpapers/bg2.jpg',
-      '/wallpapers/bg3.jpg', '/wallpapers/bg4.jpg',
-      '/wallpapers/god.jpg',
+      '/wallpapers/mountains1.jpg', '/wallpapers/minimal1.jpg', '/wallpapers/beach1.jpg',
       '/feedback-gradient.jpg', '/icon.png',
     ];
     imagePaths.forEach((src) => { const img = new Image(); img.src = src; });
