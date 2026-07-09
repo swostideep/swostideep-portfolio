@@ -108,7 +108,7 @@ const AboutModal: React.FC = () => {
                                                 <div className={classes.teaserBlock}>
                                                     <span className={classes.teaserEyebrow}>What if...</span>
                                                     <p className={classes.teaserTitle}>
-                                                        I stopped just learning to code and started building things that actually ship
+                                                        I didn&apos;t just write code. I built systems people could rely on.
                                                     </p>
                                                 </div>
                                             </Squircle>
@@ -139,19 +139,18 @@ const AboutModal: React.FC = () => {
                                                 {/* Bio container — paragraphs + CTA */}
                                                 <div className={classes.bioContainer}>
                                                     <p className={classes.bioParagraph}>
-                                                        I&apos;m currently in my 4th year of B.Tech at NIT Rourkela, building things and figuring out how they break.
+                                                        I&apos;m a 4th year B.Tech student at NIT Rourkela, passionate about building software that solves real problems—not just demos that look good.
                                                     </p>
                                                     <p className={classes.bioParagraph}>
-                                                        I&apos;m passionate about solving real problems with strong logical thinking, clean code, and a lot of trial and error.
+                                                        I enjoy designing scalable architectures, thinking through system design, and turning complex ideas into clean, maintainable software. My interests span backend engineering, computational geometry, and AI systems, where performance, reliability, and thoughtful engineering matter as much as the code itself.
                                                     </p>
                                                     <p className={classes.bioParagraph}>
-                                                        Whether it&apos;s a hackathon, an internship, or a side project, I&apos;m eager to keep building and learning by doing.
+                                                        Whether I&apos;m building MeshStage, developing full-stack applications, or experimenting with distributed systems, I enjoy taking ideas from concept to production with a strong focus on clean architecture and long-term scalability.
                                                     </p>
 
                                                     {/* CTA */}
                                                     <p className={classes.cta}>
-                                                        Let&apos;s create something meaningful together.{" "}
-                                                        <span role="img" aria-label="grinning face">😄</span>
+                                                        Let&apos;s build something meaningful.
                                                     </p>
                                                 </div>
                                             </div>
