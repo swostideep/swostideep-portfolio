@@ -18,8 +18,8 @@ import { useControlsRow } from "@/components/homePage/projectControls/controlsRo
 import classes from "./filterButton.module.css";
 
 // "Default" sits at the top as the initial / reset state. "All Works",
-// "Featured", "Backend" are the explicit filters below it.
-const FILTER_OPTIONS = ["Default", "All Works", "Featured", "Backend"] as const;
+// "Featured", "Internships" are the explicit filters below it.
+const FILTER_OPTIONS = ["Default", "All Works", "Featured", "Internships"] as const;
 type FilterOption = (typeof FILTER_OPTIONS)[number];
 
 type FilterButtonProps = {

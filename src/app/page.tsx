@@ -38,7 +38,7 @@ function HomeContent() {
   const { openModal: openVoiceModal } = useVoiceModal();
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
   const [imageIndex, setImageIndex] = useState<number>(0);
-  const WALLPAPERS = ["/wallpapers/pexels-sergei-31959340.jpg", "/bg.jpg", "/wallpapers/bg1.jpg", "/wallpapers/bg2.jpg", "/wallpapers/bg3.jpg", "/wallpapers/bg4.jpg", "/wallpapers/god.jpg"];
+  const WALLPAPERS = ["/wallpapers/minimal1.jpg", "/wallpapers/mountains1.jpg", "/wallpapers/beach1.jpg"];
   const bgImage = WALLPAPERS[imageIndex];
 
   // Screenshot State
@@ -250,13 +250,16 @@ function HomeContent() {
 
         <Dock
           mode="multi"
-          projects={PROJECTS.filter((p) => !p.hidden)}
+          projects={PROJECTS}
           isVisible={true}
           openWindows={windowModeState.openWindows}
           onIconClick={(slug) => {
-            // Projects visible as floating cards get the normal bring-to-front treatment.
-            // Projects NOT in the visible card stack open their case study overlay directly.
-            const CARD_STACK_SLUGS = ["meshstage", "iitd-vr", "credit-risk", "safeconnect"];
+            // Every project in the floating card stack gets the normal
+            // bring-to-front treatment, regardless of the active filter —
+            // windowCards looks project data up from the full PROJECTS list,
+            // not the filtered subset, so this works even for projects that
+            // aren't part of the current filter's visible set.
+            const CARD_STACK_SLUGS = ["meshstage", "iitd-vr", "credit-risk", "safeconnect", "ambiguity-labs"];
             if (CARD_STACK_SLUGS.includes(slug)) {
               windowModeState.bringToFront(slug);
             } else {

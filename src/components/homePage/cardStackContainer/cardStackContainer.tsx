@@ -14,8 +14,9 @@ import { CARD_STYLES } from "@/app/types/cards.types";
 const MOBILE_CARD_BG: Record<string, string> = {
     meshstage: "#0f172a",
     "iitd-vr": "#1a1a1a",
-    "credit-risk": "#111827",
-    safeconnect: "#1c1917",
+    "credit-risk": "#faf8f3",
+    safeconnect: "#faf8f3",
+    "ambiguity-labs": "#faf8f3",
 };
 
 // All media uses `contain` on mobile so full image/video shows without crop.
@@ -46,22 +47,22 @@ const CardStackContainer: React.FC<CardStackContainerProps> = ({
     viewMode,
 }) => {
     const filteredProjects = useMemo(() => {
-        // Default (empty filter or "Default"): three flagship projects in
-        // their original staggered layout — MeshStage, IIT Delhi VR, Credit Risk.
+        // Default (empty filter or "Default"): three flagship cards in
+        // their original staggered layout — MeshStage, IIT Delhi, Ambiguity Labs.
         if (activeFilters.length === 0 || activeFilters.includes("Default")) {
-            return PROJECTS.filter((p) => ["meshstage", "iitd-vr", "credit-risk"].includes(p.slug));
+            return PROJECTS.filter((p) => ["meshstage", "iitd-vr", "ambiguity-labs"].includes(p.slug));
         }
-        // All Works: everything including SafeConnect.
+        // All Works: everything, including Credit Risk and SafeConnect.
         if (activeFilters.includes("All Works")) {
-            return PROJECTS.filter((p) => ["meshstage", "iitd-vr", "credit-risk", "safeconnect"].includes(p.slug));
+            return PROJECTS.filter((p) => ["meshstage", "iitd-vr", "credit-risk", "safeconnect", "ambiguity-labs"].includes(p.slug));
         }
         // Featured: just the flagship case study.
         if (activeFilters.includes("Featured")) {
             return PROJECTS.filter((p) => p.slug === "meshstage");
         }
-        // Backend: services & API projects (Credit Risk + SafeConnect).
-        if (activeFilters.includes("Backend")) {
-            return PROJECTS.filter((p) => ["credit-risk", "safeconnect"].includes(p.slug));
+        // Internships: work done under an internship (IIT Delhi + Ambiguity Labs).
+        if (activeFilters.includes("Internships")) {
+            return PROJECTS.filter((p) => ["iitd-vr", "ambiguity-labs"].includes(p.slug));
         }
         // Fallback: tag-based match for any other future categories.
         return PROJECTS.filter((project) =>
@@ -276,7 +277,10 @@ const CardStackContainer: React.FC<CardStackContainerProps> = ({
 
         return windowModeState.openWindows
             .map((slug) => {
-                const project = filteredProjects.find((p) => p.slug === slug);
+                // Look up from the full project list, not the filtered subset —
+                // a window brought to front via the Dock should render even if
+                // its project isn't part of the currently active filter.
+                const project = PROJECTS.find((p) => p.slug === slug);
                 if (!project) return null;
 
                 const pos = windowModeState.getPosition(slug);
@@ -325,7 +329,7 @@ const CardStackContainer: React.FC<CardStackContainerProps> = ({
                 );
             })
             .filter(Boolean);
-    }, [windowModeState, filteredProjects, isExiting, expandedProject]);
+    }, [windowModeState, viewMode, isExiting, expandedProject]);
 
     // ── Framer-style swipeable card stack (mobile) ──────────────────────────
     // Custom card layout: no traffic lights, no window header.
@@ -496,7 +500,20 @@ const CardStackContainer: React.FC<CardStackContainerProps> = ({
                                                     objectPosition: "center",
                                                 }}
                                             />
-                                        ) : null}
+                                        ) : (
+                                            <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "12px", padding: "28px", boxSizing: "border-box" }}>
+                                                <span style={{ fontSize: "1.15rem", fontWeight: 700, color: "#1c2b33", textAlign: "center", lineHeight: 1.25, maxWidth: "92%" }}>{project.name}</span>
+                                                {project.tags && project.tags.length > 0 && (
+                                                    <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", justifyContent: "center", maxWidth: "92%" }}>
+                                                        {project.tags.map((tag) => (
+                                                            <span key={tag} style={{ fontSize: "0.7rem", color: "#5a6472", background: "rgba(0,0,0,0.04)", padding: "4px 12px", borderRadius: "100px", border: "1px solid rgba(0,0,0,0.06)" }}>
+                                                                {tag}
+                                                            </span>
+                                                        ))}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
                                     </Squircle>
 
                                     {/* Description panel — inset below the media */}

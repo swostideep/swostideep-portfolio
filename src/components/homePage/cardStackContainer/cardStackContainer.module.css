@@ -23,8 +23,11 @@
     position: absolute;
     top: 42%;
     left: 50%;
-    margin-left: calc(-1 * var(--card-window-width, 31.61rem) / 2);
-    margin-top: calc(-1 * var(--card-window-height, 29.32rem) / 2);
+    /* Kept in sync with CARD_STYLES.window in cards.types.ts — both must
+       resolve to the same clamp() so centering matches the card's real
+       rendered size at every viewport width. */
+    margin-left: calc(-1 * clamp(20rem, 34vw, 31.61rem) / 2);
+    margin-top: calc(-1 * clamp(18.5rem, 31.5vw, 29.32rem) / 2);
     cursor: grab;
     /* DO NOT use filter:drop-shadow here  it breaks backdrop-filter on children */
 }

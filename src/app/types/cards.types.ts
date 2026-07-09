@@ -15,7 +15,10 @@ export type CardProps = {
     isActive?: boolean;
 };
 
+// clamp() so cards shrink on laptop-width viewports instead of staying
+// pinned to a size tuned for large desktop monitors (was overlapping the
+// sidebar on MacBook-sized screens while looking fine on a 24"+ display).
 export const CARD_STYLES = {
-    window: { width: "31.61rem", height: "29.32rem" },
-    grid: { width: "23.7rem", height: "22rem" }
+    window: { width: "clamp(20rem, 34vw, 31.61rem)", height: "clamp(18.5rem, 31.5vw, 29.32rem)" },
+    grid: { width: "clamp(16rem, 26vw, 23.7rem)", height: "clamp(14.8rem, 24vw, 22rem)" }
 };
